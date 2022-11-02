@@ -1,0 +1,14 @@
+{%  extends 'main.html' %}
+
+{% block content %}
+
+   {% for n in form %}
+    <div class="text-center py-10">
+        <h1>Name- {{n.name}}</h1>
+        <h1>Email Address- {{n.email}}</h1>
+        <h1>Phone Number-  {{n.phone_number}}</h1>
+    </div>
+   {% endfor %}
+
+
+{% endblock %}

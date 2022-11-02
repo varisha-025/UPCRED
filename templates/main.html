@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>UPCRED | Your Contact Book App</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+	<link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand ml-6" href="/">UPCRED</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="False" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+			<div>
+			  <ul class="navbar-nav mr-auto">
+				{% if user.is_authenticated %}
+				
+				
+				<li class="nav-item">
+				  <a class="nav-link" href="/">Welcome, {{user.username}}</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link text-right" href="{% url 'logout' %}">Logout</a>
+				</li>
+				
+		  
+				{% else %}
+		  
+				<li class="nav-item">
+				  <a class="nav-link text-right" href="{% url 'login' %}">Login</a>
+				</li>
+		  
+				{% endif %}
+			  </ul>
+			</div>
+		  </nav>
+	{% block content %}
+
+
+
+	{% endblock %}
+    </div>
+	
+</body>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+</html>

@@ -1,0 +1,44 @@
+{%  extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container border-2 my-28 w-2/5 py-20 text-center flex flex-row justify-center bg-[#000f0]">
+    <div>
+        <h2 class="text-4xl"> CREATE CONTACT </h2>
+	
+		<div class="">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        
+			
+            <form action="createContact" method="POST" >
+                {% csrf_token %}
+				{% for field in form %}
+                   
+                    <div class="mb-2">
+                    <label class=" text-2xl form-label capitalize my-4 font-bold">{{field.name}} :</label>
+                   <div class=" drop-shadow-lg p-1	">{{field}}
+                   </div>
+                    
+                    </div>
+				{% endfor %}
+               
+                <button type="submit" class=" mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Submit
+                  </button>
+              </form>
+
+		</div>
+</div>
+<div>
+
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{%  extends 'main.html' %}
+
+{% block content %}
+
+<div class="container text-center flex flex-row justify-center my-10">
+	<div class="">
+		<h2 class="font-bold text-4xl my-8"> Want to create a new contact? </h2>
+		<a class="btn btn-primary" href="{% url 'createContact' %}">Create Contact</a>
+		<h1 class="font-bold text-3xl mt-4">All Contact Numbers:</h1>
+
+		 <div class="row my-4">
+			<div class="col">
+				<div class="card card-body">
+		
+					<form method="GET" action="/">
+						{%  csrf_token %}
+						{{filter.form}}
+						<button class="btn btn-primary" type="submit">Search</button>
+				  	</form>
+		
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="p-4 my-10">
+				{% for contact in page_obj.object_list %}
+					<ul class="my-4 list-group">
+						<li class="list-group-item pb-8">
+							<div class="flex justify-end items-end">
+								<a href="{% url 'updateContact' contact.id %}" class="mx-2 my-2"><i class="fa-solid fa-pen"></i></a> 
+							 <a href="{% url 'deleteContact' contact.id %}" class="mr-3 ml-2 my-2"><i class="fa-solid fa-trash"></i></a> 
+							</div>
+							<h1 class="text-2xl"> Name : {{contact.name}}</h1>
+							<h1 class="text-2xl"> Phone Number : {{contact.phone_number}}</h1>
+							
+						</li>
+					</ul>
+				{% endfor %}
+		</div>
+	</div>
+</div>
+<nav class="container text-center flex justify-center my-12">
+	<ul class="pagination">
+		{% if page_obj.has_previous %}
+		<li class="page-item">
+			<a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+			<span aria-hidden="true">Previous</span>
+			</a>
+		</li>
+		{% endif %}
+		{%if page_obj.number < 4 %}
+		<li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+		<li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+		<li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+		{% else  %}
+		<li class="page-item"><a class="page-link" href="?page={{page_obj.number}}">{{page_obj.number}}</a></li>
+		{% endif %}
+
+		{% if page_obj.has_next %}
+			<li class="page-item">
+				<a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+				<span aria-hidden="true">Next</span>
+				</a>
+			</li>
+		{% endif %}
+	</ul>
+  </nav> 
+	</div>
+
+</div>
+
+{% endblock %}
